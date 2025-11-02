@@ -42,26 +42,17 @@ const CurrencyConverter: React.FC = () => {
   // Mock currency data
   const currencies: Currency[] = [
     { code: 'USD', name: 'US Dollar', symbol: '$' },
+    { code: 'NGN', name: 'Nigeria Naira', symbol: '₦' },
     { code: 'EUR', name: 'Euro', symbol: '€' },
     { code: 'GBP', name: 'British Pound', symbol: '£' },
-    { code: 'JPY', name: 'Japanese Yen', symbol: '¥' },
+    // { code: 'JPY', name: 'Japanese Yen', symbol: '¥' },
     { code: 'CAD', name: 'Canadian Dollar', symbol: 'CA$' },
     { code: 'AUD', name: 'Australian Dollar', symbol: 'A$' },
-    { code: 'NGN', name: 'Nigeria Naira', symbol: '₦' },
-    { code: 'CHF', name: 'Swiss Franc', symbol: 'CHF' },
-    { code: 'CNY', name: 'Chinese Yuan', symbol: '¥' },
-    { code: 'INR', name: 'Indian Rupee', symbol: '₹' },
-    { code: 'SGD', name: 'Singapore Dollar', symbol: 'S$' },
+    // { code: 'CHF', name: 'Swiss Franc', symbol: 'CHF' },
+    // { code: 'CNY', name: 'Chinese Yuan', symbol: '¥' },
+    // { code: 'INR', name: 'Indian Rupee', symbol: '₹' },
+    // { code: 'SGD', name: 'Singapore Dollar', symbol: 'S$' },
   ];
-
-  // Mock exchange rates
-  // const exchangeRates: ExchangeRate[] = [
-  //   { from: 'USD', to: 'EUR', rate: 0.85, lastUpdated: '2024-01-15T10:30:00Z' },
-  //   { from: 'USD', to: 'GBP', rate: 0.73, lastUpdated: '2024-01-15T10:30:00Z' },
-  //   { from: 'USD', to: 'JPY', rate: 145.25, lastUpdated: '2024-01-15T10:30:00Z' },
-  //   { from: 'EUR', to: 'USD', rate: 1.18, lastUpdated: '2024-01-15T10:30:00Z' },
-  //   { from: 'GBP', to: 'USD', rate: 1.37, lastUpdated: '2024-01-15T10:30:00Z' },
-  // ];
 
   // Simulate API call for conversion
   const convertCurrency = async () => {

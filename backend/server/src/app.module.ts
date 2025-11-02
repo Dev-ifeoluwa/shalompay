@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { AdminAuthModule } from './admin-auth/admin-auth.module';
 import { AdminModule } from './admin/admin.module';
+import { CurrencyModule } from './currency/currency.module';
 
 
 
@@ -14,7 +15,7 @@ import { AdminModule } from './admin/admin.module';
   imports: [ 
     ConfigModule.forRoot({
       isGlobal: true
-  }), AuthModule, UsersModule, AdminAuthModule, AdminModule],
+  }), AuthModule, UsersModule, AdminAuthModule, AdminModule, CurrencyModule],
   controllers: [AppController],
   providers: [AppService, PrismaService],
 })

@@ -17,22 +17,23 @@ datasource db {
 // transactions    Json?         @default("[]")
 
 model TotalUser {
-  id                   Int           @id @default(autoincrement())
-  email                String        @unique
+  id                   Int                 @id @default(autoincrement())
+  email                String              @unique
   password             String
   firstName            String
   lastName             String
   phoneNumber          String
   transactionPin       String?
-  balance              Float         @default(0)
+  balance              Float               @default(0)
   transactions         Transaction[]
   accountNumber        String?
   monnifyAccountRef    String? // your generated reference used with Monnify
   monnifyReservedId    String? // Monnify's reserved-account id (if provided)
   monnifyAccountNumber String? // the actual virtual account number
   monnifyAccountStatus String?
-  createdAt            DateTime      @default(now())
-  updatedAt            DateTime      @updatedAt
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+  conversions          ConversionHistory[]
 }
 
 model Transaction {
@@ -48,13 +49,27 @@ model Transaction {
   userId        Int
 }
 
+model ConversionHistory {
+  id              Int      @id @default(autoincrement())
+  userId          Int
+  fromCurrency    String
+  toCurrency      String
+  amount          Float
+  rate            Float
+  convertedAmount Float
+  timestamp       DateTime @default(now())
+
+  // user            User     @relation(fields: [userId], references: [id])
+  user TotalUser @relation(fields: [userId], references: [id])
+}
+
 model Admin {
-  id            Int       @id @default(autoincrement())
-  email         String    @unique
-  password      String
-  firstName     String
-  middleName    String
-  lastName      String
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  id         Int      @id @default(autoincrement())
+  email      String   @unique
+  password   String
+  firstName  String
+  middleName String
+  lastName   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
