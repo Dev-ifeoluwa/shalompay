@@ -56,10 +56,17 @@ const ConverterTab: React.FC<ConverterTabProps> = ({
                 onChange={(e) => setFromCurrency(e.target.value)}
                 className="flex-1 bg-white text-green-900 rounded-lg px-3 py-3 font-semibold border-0 focus:ring-2 focus:ring-green-300"
               >
-                {currencies.map((currency) => (
+                {/* {currencies.map((currency) => (
                   <option key={currency.code} value={currency.code}>
                     {currency.code} - {currency.name}
                   </option>
+                ))} */}
+
+
+                {currencies.map((currency, index) => (
+                    <option key={`${currency.code}-${index}`} value={currency.code}>
+                     {currency.code} - {currency.name}
+                    </option>
                 ))}
               </select>
             </div>

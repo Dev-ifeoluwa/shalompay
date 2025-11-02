@@ -89,7 +89,7 @@ const ExchangeRatesTab: React.FC<ExchangeRatesTabProps> = ({ currencies, exchang
             >
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-gradient-to-r from-green-400 to-lime-400 rounded-full flex items-center justify-center text-white font-bold">
+                  <div className="w-10 h-10 bg-linear-to-r from-green-400 to-lime-400 rounded-full flex items-center justify-center text-white font-bold">
                     {currency?.symbol || rate.to.charAt(0)}
                   </div>
                   <div>

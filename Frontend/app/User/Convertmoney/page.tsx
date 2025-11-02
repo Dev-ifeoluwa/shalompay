@@ -7,6 +7,7 @@ import ExchangeRatesTab from 'components/ConverterCom/ExchangeRateCom';
 import { ArrowLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
+import { convertCurrencyApi } from 'service/currencyService';
 
 // Types
 interface Currency {
@@ -32,9 +33,11 @@ const CurrencyConverter: React.FC = () => {
   const [lastUpdated, setLastUpdated] = useState<string>('');
   const [activeTab, setActiveTab] = useState<'converter' | 'rates' | 'history'>('converter');
   const router = useRouter()
-      const HandleClick = () => {
-          router.push("/UserDashboard")
-      }
+
+
+  const HandleClick = () => {
+     router.push("/UserDashboard")
+  }
 
   // Mock currency data
   const currencies: Currency[] = [
@@ -44,6 +47,7 @@ const CurrencyConverter: React.FC = () => {
     { code: 'JPY', name: 'Japanese Yen', symbol: '¥' },
     { code: 'CAD', name: 'Canadian Dollar', symbol: 'CA$' },
     { code: 'AUD', name: 'Australian Dollar', symbol: 'A$' },
+    { code: 'NGN', name: 'Nigeria Naira', symbol: '₦' },
     { code: 'CHF', name: 'Swiss Franc', symbol: 'CHF' },
     { code: 'CNY', name: 'Chinese Yuan', symbol: '¥' },
     { code: 'INR', name: 'Indian Rupee', symbol: '₹' },
@@ -51,32 +55,56 @@ const CurrencyConverter: React.FC = () => {
   ];
 
   // Mock exchange rates
-  const exchangeRates: ExchangeRate[] = [
-    { from: 'USD', to: 'EUR', rate: 0.85, lastUpdated: '2024-01-15T10:30:00Z' },
-    { from: 'USD', to: 'GBP', rate: 0.73, lastUpdated: '2024-01-15T10:30:00Z' },
-    { from: 'USD', to: 'JPY', rate: 145.25, lastUpdated: '2024-01-15T10:30:00Z' },
-    { from: 'EUR', to: 'USD', rate: 1.18, lastUpdated: '2024-01-15T10:30:00Z' },
-    { from: 'GBP', to: 'USD', rate: 1.37, lastUpdated: '2024-01-15T10:30:00Z' },
-  ];
+  // const exchangeRates: ExchangeRate[] = [
+  //   { from: 'USD', to: 'EUR', rate: 0.85, lastUpdated: '2024-01-15T10:30:00Z' },
+  //   { from: 'USD', to: 'GBP', rate: 0.73, lastUpdated: '2024-01-15T10:30:00Z' },
+  //   { from: 'USD', to: 'JPY', rate: 145.25, lastUpdated: '2024-01-15T10:30:00Z' },
+  //   { from: 'EUR', to: 'USD', rate: 1.18, lastUpdated: '2024-01-15T10:30:00Z' },
+  //   { from: 'GBP', to: 'USD', rate: 1.37, lastUpdated: '2024-01-15T10:30:00Z' },
+  // ];
 
   // Simulate API call for conversion
   const convertCurrency = async () => {
+    if(!amount) return
+
     setIsLoading(true);
 
+
+    try {
+
+      await new Promise(resolve => setTimeout(resolve, 500));
+      const numericAmount = parseFloat(amount) || 0;
+
+      const { rate, convertedAmount } = await convertCurrencyApi(
+        fromCurrency,
+        toCurrency,
+        numericAmount
+      );
+
+      setConvertedAmount(convertedAmount.toFixed(4));
+      setExchangeRate(rate);
+      setLastUpdated(new Date().toLocaleTimeString());
+
+      setIsLoading(false);
+    } catch (error: any) {
+      console.error(error);
+      alert(error.message || "Error converting currency. Please try again.");
+    }
+
     // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 500));
+    // await new Promise(resolve => setTimeout(resolve, 500));
 
-    const numericAmount = parseFloat(amount) || 0;
-    const rate = exchangeRates.find(
-      rate => rate.from === fromCurrency && rate.to === toCurrency
-    )?.rate || 1;
+    // const numericAmount = parseFloat(amount) || 0;
+    // const rate = exchangeRates.find(
+    //   rate => rate.from === fromCurrency && rate.to === toCurrency
+    // )?.rate || 1;
 
-    const converted = numericAmount * rate;
-    setConvertedAmount(converted.toFixed(4));
-    setExchangeRate(rate);
-    setLastUpdated(new Date().toLocaleTimeString());
+    // const converted = numericAmount * rate;
+    // setConvertedAmount(converted.toFixed(4));
+    // setExchangeRate(rate);
+    // setLastUpdated(new Date().toLocaleTimeString());
 
-    setIsLoading(false);
+    // setIsLoading(false);
   };
 
   // Swap currencies
@@ -96,6 +124,9 @@ const CurrencyConverter: React.FC = () => {
       convertCurrency();
     }
   }, [amount, fromCurrency, toCurrency]);
+
+
+
 
   return (
     <div className="min-h-screen text-sm md:text-md mb-15 pt-8 md:pt-5 py-8">
@@ -155,6 +186,7 @@ const CurrencyConverter: React.FC = () => {
                 exchangeRate={exchangeRate}
                 isLoading={isLoading}
                 lastUpdated={lastUpdated}
+                // currencies={[]}
                 currencies={currencies}
                 onSwap={swapCurrencies}
               />
@@ -162,8 +194,9 @@ const CurrencyConverter: React.FC = () => {
 
             {activeTab === 'rates' && (
               <ExchangeRatesTab
+                // currencies={[]}
                 currencies={currencies}
-                exchangeRates={exchangeRates}
+                exchangeRates={[]}
               />
             )}
 
