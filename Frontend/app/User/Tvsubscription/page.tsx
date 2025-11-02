@@ -28,7 +28,7 @@ export default function TvSubsPage() {
 
     const handleCardClick = (plan: any) => {
         if(!tvNetwork || !smartCardNumber) {
-            alert('please select network and enter phone number')
+            alert('please select Tv Provider and enter Smart Card Number')
             return
         }
             setSelectPlan(plan)
