@@ -69,6 +69,28 @@ export default function ProfilePage() {
   if (!dashboard) return <Preloader />;
 
 
+
+
+  const handleLogout = async () => {
+  try {
+    const res = await fetch(`${API_URL}/auth/logout`, {
+      method: 'POST',
+      credentials: 'include', // important to send cookies!
+    });
+
+    if (res.ok) {
+      localStorage.removeItem('token'); // Remove token from localStorage
+      router.push('/Account/Signin'); // Redirect to Signin page
+    } else {
+      console.error("Failed to logout");
+    }
+  } catch (err) {
+    console.error("Error logging out:", err);
+  }
+};
+
+
+
   const SettingsitemsTop: Settings[] = [
     {
       icon: Home,
@@ -135,10 +157,10 @@ export default function ProfilePage() {
               <span className="bg-green-900 p-2 rounded-full"><Newspaper size={19} /></span>
               <p>Blog</p>
             </Link>
-            <Link href={"/"} className="flex flex-col items-center">
+            <div onClick={handleLogout} className="flex flex-col items-center">
               <span className="bg-green-900 p-2 rounded-full"><LogOut size={19} /></span>
               <p>SIgn Out</p>
-            </Link>
+            </div>
           </div>
         </div>
         <div className="shadow-gray-400 shadow-sm px-2 py-3 rounded-lg">
