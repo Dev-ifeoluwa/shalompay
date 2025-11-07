@@ -23,7 +23,6 @@ const Signup = () => {
     e.preventDefault();
     try {
       const res = await fetch(`${API_URL}/auth/register`, {
-      // const res = await fetch('http://localhost:5000/auth/register', {
         method: "POST",
         credentials: "include",
         headers: {
