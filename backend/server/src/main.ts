@@ -10,8 +10,8 @@ async function bootstrap() {
   // for cors to talk to frontend
   app.enableCors({
     origin: [
+      'https://shalompay.vercel.app',
       'http://localhost:3000',
-      'https://shalompay.vercel.app/'
       // "https://novapay-six.vercel.app"
     ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
