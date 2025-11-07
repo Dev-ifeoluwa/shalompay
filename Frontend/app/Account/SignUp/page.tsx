@@ -8,7 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 const Signup = () => {
   const router = useRouter();
-  
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -28,7 +28,13 @@ const Signup = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ firstName, lastName, email, password, phoneNumber }),
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          password,
+          phoneNumber
+        }),
 
       })
       if (res.ok) {
@@ -47,16 +53,16 @@ const Signup = () => {
 
   return (
     <div className="flex flex-col items-center px-2 py-15 justify-center min-h-screen bg-gray-100">
-        <div className="flex items-center gap-4 px-auto mx-auto pb-6 ">
-          <Image 
-            src="/favicon.ico" 
-            alt="Logo" 
-            width={40} 
-            height={40} 
-            className="rounded-full bg-green-950"
-            />
-            <h2 className="text-2xl font-bold">Shalompay</h2>
-        </div>
+      <div className="flex items-center gap-4 px-auto mx-auto pb-6 ">
+        <Image
+          src="/favicon.ico"
+          alt="Logo"
+          width={40}
+          height={40}
+          className="rounded-full bg-green-950"
+        />
+        <h2 className="text-2xl font-bold">Shalompay</h2>
+      </div>
       <div className="bg-white rounded-2xl shadow-md p-8 w-full max-w-md">
         {/* Header */}
         <div className="flex flex-col items-center mb-4">
@@ -72,14 +78,14 @@ const Signup = () => {
           <div className="grid grid-cols-2 gap-3">
             <input
               type="text"
-              value={firstName} 
+              value={firstName}
               onChange={e => setFirstName(e.target.value)}
               placeholder="Firstname"
               className="border-b-2 border-gray-200 focus:border-green-950 outline-none py-1"
             />
             <input
               type="text"
-              value={lastName} 
+              value={lastName}
               onChange={e => setLastName(e.target.value)}
               placeholder="Lastname"
               className="border-b-2 border-gray-200 focus:border-green-950 outline-none py-1"
@@ -108,7 +114,7 @@ const Signup = () => {
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
-                value={password} 
+                value={password}
                 onChange={e => setPassword(e.target.value)}
                 placeholder="Create Password"
                 className="w-full border-b-2 border-gray-200 focus:border-green-950 outline-none py-1 pr-8"
