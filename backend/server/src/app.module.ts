@@ -8,6 +8,9 @@ import { UsersModule } from './users/users.module';
 import { AdminAuthModule } from './admin-auth/admin-auth.module';
 import { AdminModule } from './admin/admin.module';
 import { CurrencyModule } from './currency/currency.module';
+import { VtpassModule } from './vtpass/vtpass.module';
+import { TransactionsModule } from './transactions/transactions.module';
+import { PinModule } from './pin/pin.module';
 
 
 
@@ -15,7 +18,7 @@ import { CurrencyModule } from './currency/currency.module';
   imports: [ 
     ConfigModule.forRoot({
       isGlobal: true
-  }), AuthModule, UsersModule, AdminAuthModule, AdminModule, CurrencyModule],
+  }), AuthModule, UsersModule, AdminAuthModule, AdminModule, CurrencyModule, VtpassModule, TransactionsModule, PinModule],
   controllers: [AppController],
   providers: [AppService, PrismaService],
 })

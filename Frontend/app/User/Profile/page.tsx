@@ -20,6 +20,7 @@ import {
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Preloader from "components/preloader";
+import toast, { Toaster } from "react-hot-toast";
 
 type Settings = {
   title: string;
@@ -79,8 +80,9 @@ export default function ProfilePage() {
     });
 
     if (res.ok) {
+      toast.success("logout successfully!")
       localStorage.removeItem('token'); // Remove token from localStorage
-      router.push('/Account/Signin'); // Redirect to Signin page
+      router.push('/Account/loginaccount'); // Redirect to Signin page
     } else {
       console.error("Failed to logout");
     }
@@ -157,10 +159,10 @@ export default function ProfilePage() {
               <span className="bg-green-900 p-2 rounded-full"><Newspaper size={19} /></span>
               <p>Blog</p>
             </Link>
-            <div onClick={handleLogout} className="flex flex-col items-center">
-              <span className="bg-green-900 p-2 rounded-full"><LogOut size={19} /></span>
+            <button onClick={handleLogout} className="flex flex-col items-center">
+              <span className="bg-green-900 cursor-pointer p-2 rounded-full"><LogOut size={19} /></span>
               <p>SIgn Out</p>
-            </div>
+            </button>
           </div>
         </div>
         <div className="shadow-gray-400 shadow-sm px-2 py-3 rounded-lg">
@@ -186,6 +188,7 @@ export default function ProfilePage() {
           </div>
         </div>
       </div>
+      <Toaster position="top-center" reverseOrder={false} />
     </>
   );
 }

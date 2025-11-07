@@ -37,9 +37,11 @@ export class UsersService {
     }
 
     async updatePin(userId: number, transactionPin: string) {
-    return this.prisma.totalUser.update({
-    where: { id: userId },
-    data: { transactionPin },
+      const hasedPin = await bcrypt.hash(transactionPin, 10)
+
+      return this.prisma.totalUser.update({
+        where: { id: userId },
+        data: { transactionPin: hasedPin },
       });
     }
 
@@ -72,8 +74,8 @@ export class UsersService {
         orderBy: { createdAt: 'desc' },
         select: {
           id: true,
-          itemsPurchase: true,
-          DayPurchased: true,
+          itemsPurchased: true,
+          dayPurchased: true,
           itemsTime: true,
           description: true,
           amount: true,

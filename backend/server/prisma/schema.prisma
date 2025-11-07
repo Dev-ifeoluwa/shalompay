@@ -14,7 +14,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// transactions    Json?         @default("[]")
+// ========== ENUMS ==========
+
+enum TransactionStatus {
+  PENDING
+  SUCCESS
+  FAILED
+  REVERSED
+}
+
+enum TransactionType {
+  AIRTIME
+  DATA
+  TV_SUBSCRIPTION
+  ELECTRICITY
+  EDUCATION
+  SPORT
+  WALLET_FUNDING
+}
+
+enum Provider {
+  VTPASS
+  INTERNAL
+}
 
 model TotalUser {
   id                   Int                 @id @default(autoincrement())
@@ -26,6 +48,7 @@ model TotalUser {
   transactionPin       String?
   balance              Float               @default(0)
   transactions         Transaction[]
+  wallet               Wallet?
   accountNumber        String?
   monnifyAccountRef    String? // your generated reference used with Monnify
   monnifyReservedId    String? // Monnify's reserved-account id (if provided)
@@ -36,40 +59,71 @@ model TotalUser {
   conversions          ConversionHistory[]
 }
 
+// Wallet System
+model Wallet {
+  id        Int       @id @default(autoincrement())
+  userId    Int       @unique
+  user      TotalUser @relation(fields: [userId], references: [id])
+  currency  String    @default("NGN")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
 model Transaction {
-  id            Int       @id @default(autoincrement())
-  amount        Float
-  type          String
-  itemsPurchase String
-  DayPurchased  String
-  itemsTime     String
-  description   String
-  createdAt     DateTime  @default(now())
-  user          TotalUser @relation(fields: [userId], references: [id])
-  userId        Int
+  id             Int               @id @default(autoincrement())
+  amount         Float
+  type           TransactionType
+  provider       Provider?
+  providerRef    String?
+  idempotencyKey String?           @unique
+  status         TransactionStatus @default(PENDING)
+  meta           Json?
+  description    String?
+  itemsPurchased String?
+  dayPurchased   DateTime?
+  itemsTime      DateTime?
+  proofUrl       String? // <-- add: link to uploaded proof or ref
+  approvedById   Int? // <-- add: admin id who approved
+  createdAt      DateTime          @default(now())
+
+  userId Int
+  user   TotalUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  approvedBy Admin? @relation(fields: [approvedById], references: [id])
+}
+
+model Service {
+  id        String   @id @default(cuid())
+  name      String // e.g., "MTN 1GB Data"
+  type      String // e.g., "DATA", "AIRTIME"
+  code      String // e.g., VTpass variation_code
+  price     Float
+  provider  Provider
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model ConversionHistory {
-  id              Int      @id @default(autoincrement())
+  id              Int       @id @default(autoincrement())
   userId          Int
   fromCurrency    String
   toCurrency      String
   amount          Float
   rate            Float
   convertedAmount Float
-  timestamp       DateTime @default(now())
-
-  // user            User     @relation(fields: [userId], references: [id])
-  user TotalUser @relation(fields: [userId], references: [id])
+  timestamp       DateTime  @default(now())
+  user            TotalUser @relation(fields: [userId], references: [id])
 }
 
 model Admin {
-  id         Int      @id @default(autoincrement())
-  email      String   @unique
-  password   String
-  firstName  String
-  middleName String
-  lastName   String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id          Int           @id @default(autoincrement())
+  email       String        @unique
+  password    String
+  firstName   String
+  middleName  String
+  lastName    String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  Transaction Transaction[]
 }

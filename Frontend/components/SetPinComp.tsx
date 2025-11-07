@@ -28,10 +28,11 @@ const SetPinCom: React.FC = () => {
       return;
     }
 
-    const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+    // const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
     try {
-      const res = await fetch(`${API_URL}/auth/setPin`, {
+      // const res = await fetch(`${API_URL}/auth/setPin`, {
+      const res = await fetch(`http://localhost:5000/auth/setPin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, transactionPin }),
@@ -77,7 +78,7 @@ const SetPinCom: React.FC = () => {
 
         <button
           type="submit"
-          className="w-full py-2 bg-linear-to-r from-green-700 to-lime-400 text-white rounded-lg font-medium hover:opacity-90 transition"
+          className="w-full py-2 cursor-pointer bg-linear-to-r from-green-700 to-lime-400 text-white rounded-lg font-medium hover:opacity-90 transition"
         >
           Proceed
         </button>
