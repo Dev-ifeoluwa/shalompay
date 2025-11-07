@@ -28,11 +28,11 @@ const SetPinCom: React.FC = () => {
       return;
     }
 
-    // const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+    const API_URL = process.env.NEST_DEPLOYMENT_API_URL || 'http://localhost:5000';
 
     try {
-      // const res = await fetch(`${API_URL}/auth/setPin`, {
-      const res = await fetch(`http://localhost:5000/auth/setPin`, {
+      const res = await fetch(`${API_URL}/auth/setPin`, {
+      // const res = await fetch(`http://localhost:5000/auth/setPin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, transactionPin }),

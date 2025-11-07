@@ -15,13 +15,13 @@ const Signin = () => {
   const [showPassword, setShowPassword] = useState(false);
 
 
-  // const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000' ;
+  const API_URL = process.env.NEST_DEPLOYMENT_API_URL || 'http://localhost:5000';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch(`http://localhost:5000/auth/login`, {
-      // const res = await fetch(`${API_URL}/auth/login`, {
+      // const res = await fetch(`http://localhost:5000/auth/login`, {
+      const res = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         credentials: "include",
         headers: {
