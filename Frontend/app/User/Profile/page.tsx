@@ -35,7 +35,7 @@ export default function ProfilePage() {
     router.push("/UserDashboard");
   };
 
-  const API_URL = process.env.NEST_DEPLOYMENT_API_URL || 'http://localhost:5000';
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
     const token = localStorage.getItem('token');

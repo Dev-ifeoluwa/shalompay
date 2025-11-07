@@ -13,7 +13,7 @@ export default function UserDashboard() {
     const [showBalance, setShowBalance] = useState(false)
     const toggleBalance = () => setShowBalance(!showBalance)
 
-    // const API_URL = process.env.NEST_DEPLOYMENT_API_URL || 'http://localhost:5000';
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -25,8 +25,8 @@ export default function UserDashboard() {
         }
 
         const fetchDashboard = async () => {
-            const res = await fetch('https://shalompay.onrender.com/auth/me', {
-            // const res = await fetch(`${API_URL}/auth/me`, {
+            // const res = await fetch('https://shalompay.onrender.com/auth/me', {
+            const res = await fetch(`${API_URL}/auth/me`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
