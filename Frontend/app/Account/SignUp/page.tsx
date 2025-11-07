@@ -17,12 +17,13 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
 
 
-  const API_URL = process.env.NEST_DEPLOYMENT_API_URL;
+  // const API_URL = process.env.NEST_DEPLOYMENT_API_URL;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch(`${API_URL}/auth/register`, {
+      // const res = await fetch(`${API_URL}/auth/register`, {
+      const res = await fetch('https://shalompay.onrender.com/auth/register', {
         method: "POST",
         credentials: "include",
         headers: {
