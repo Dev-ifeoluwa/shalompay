@@ -4,6 +4,7 @@ import { ArrowLeft, CircleUser, Dot, Newspaper } from "lucide-react";
 import { tree } from "next/dist/build/templates/app-page";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function SportBettingTopup() {
     const router = useRouter()
@@ -20,7 +21,7 @@ export default function SportBettingTopup() {
 
     const handlePurchaseBtn = () => {
         if (!chooseBet || !betId || !price) {
-            alert('please select enter bet option, Bet Id and price')
+            toast.error('select enter bet provider, bet id and amount')
             return
         }
         setShowPopUp(true)
@@ -142,7 +143,7 @@ export default function SportBettingTopup() {
                     {/* bottom */}
                     <div className="fixed mb-13 p-2 shadow-md
                         rounded-t-3xl shadow-t-sm shadow-gray-400 w-full h-50 md:max-w-2xl mx-auto
-                        bottom-0 left-0 right-0 bg-gray-300 justify-center z-50">
+                        bottom-0 left-0 right-0 bg-white justify-center z-50">
                         <div className=" p-3 rounded-2xl">
                             <div className="flex flex-col gap-4">
                                 <p className="flex justify-between items-center px-4"><strong>Bet Provider: </strong>{chooseBet}</p>
@@ -168,7 +169,7 @@ export default function SportBettingTopup() {
                     <div>
                     </div>
                     {/* bottom */}
-                    <div className="bg-gray-200 left-0 right-0 p-4 shadow-md
+                    <div className="bg-white mb-5 left-0 right-0 p-4 shadow-md
                         rounded-t-3xl shadow-t-sm w-full md:max-w-2xl mx-auto">
                         <div className="flex flex-col gap-3 items-center">
                             <h1 className="flex justify-between items-center text-lg px-4 font-bold">Input your pin to pay</h1>
@@ -200,6 +201,7 @@ export default function SportBettingTopup() {
                     </div>
                 </div>
             )}
+            <Toaster position="top-center" reverseOrder={true} />
         </div>
     )
 }

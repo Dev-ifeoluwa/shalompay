@@ -3,6 +3,7 @@
 import { ArrowLeft, CircleUser, Newspaper, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 type DataPlan = {
     // id: number;
@@ -71,9 +72,23 @@ export default function MobileDataTopup() {
 
     const handleCardClick = (plan: any) => {
         if (!network || !phoneNumber) {
-            alert('please select network and enter phone number')
+            toast.error('select network and enter phone number')
             return
         }
+
+        if (!phoneNumber.startsWith('0')) {
+            setError('Phone number must start with 0');
+            setShowPopup(false);
+            return;
+        }
+
+        if (phoneNumber.length !== 11) {
+            setError('Phone number must be 11 digits');
+            setShowPopup(false);
+            return;
+        }
+
+        setError('');
         setSelectPlan(plan)
         setShowPopup(true)
     }
@@ -163,14 +178,6 @@ export default function MobileDataTopup() {
         }
     };
 
-    // const transactionPin = pin.join("");
-
-    // if (transactionPin.length < 4) {
-    //     alert("Please enter a 4-digit PIN");
-    //     return;
-    // }
-
-
     return (
         <div className="p-2 pt-8 mb-15 text-sm md:text-md flex md:pt-5 flex-col gap-5">
             {error && (
@@ -197,7 +204,10 @@ export default function MobileDataTopup() {
                         <option value="Airtel">Airtel</option>
                         <option value="9mobile">9mobile</option>
                     </select>
-                    <input name="" type="tel"
+                    <input
+                        name="tel"
+                        id='tel'
+                        type="tel"
                         value={phoneNumber}
                         onChange={(e) => {
                             const value = e.target.value.replace(/\D/g, '');
@@ -214,7 +224,7 @@ export default function MobileDataTopup() {
                         }}
                         maxLength={11}
                         className="max-w-50 px-7 py-1 outline-0 border-0"
-                        id="" placeholder="Phone number"
+                        placeholder="Phone number"
                     />
                 </div>
                 <div className="bg-green-600 rounded-full">
@@ -263,7 +273,7 @@ export default function MobileDataTopup() {
                     <div>
                     </div>
                     {/* bottom */}
-                    <div className="mb-13 bg-gray-200 left-0 right-0 p-4 shadow-md
+                    <div className="mb-13 bg-white left-0 right-0 p-4 shadow-md
                             rounded-t-3xl shadow-t-sm w-full md:max-w-2xl mx-auto">
                         <div className="flex flex-col gap-3">
                             <p className="flex justify-between items-center px-4"><strong>Service: </strong>{network}</p>
@@ -290,7 +300,7 @@ export default function MobileDataTopup() {
                     <div>
                     </div>
                     {/* bottom */}
-                    <div className="bg-gray-200 left-0 right-0 p-4 shadow-md
+                    <div className="bg-white mb-5 left-0 right-0 p-4 shadow-md
                         rounded-t-3xl shadow-t-sm w-full md:max-w-2xl mx-auto">
                         <div className="flex flex-col gap-3 items-center">
                             <h1 className="flex justify-between items-center text-lg px-4 font-bold">Input your pin to pay</h1>
@@ -322,6 +332,7 @@ export default function MobileDataTopup() {
                     </div>
                 </div>
             )}
+            <Toaster position="top-center" reverseOrder={true} />
         </div>
     )
 }

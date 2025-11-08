@@ -43,7 +43,7 @@ const ConverterTab: React.FC<ConverterTabProps> = ({
   return (
     <div className="space-y-6">
       {/* Conversion Card */}
-      <div className="bg-green-600 rounded-2xl p-6 text-white">
+      <div className="bg-green-500 rounded-2xl p-6 text-white">
         <div className="grid grid-cols-1 gap-5 items-center">
           {/* From Currency */}
           <div className="space-y-3">
@@ -56,13 +56,6 @@ const ConverterTab: React.FC<ConverterTabProps> = ({
                 onChange={(e) => setFromCurrency(e.target.value)}
                 className="flex-1 bg-white text-green-900 rounded-lg px-3 py-3 font-semibold border-0 focus:ring-2 focus:ring-green-300"
               >
-                {/* {currencies.map((currency) => (
-                  <option key={currency.code} value={currency.code}>
-                    {currency.code} - {currency.name}
-                  </option>
-                ))} */}
-
-
                 {currencies.map((currency, index) => (
                     <option key={`${currency.code}-${index}`} value={currency.code}>
                      {currency.code} - {currency.name}
@@ -119,7 +112,7 @@ const ConverterTab: React.FC<ConverterTabProps> = ({
             <div className="relative">
               <input
                 type="text"
-                value={isLoading ? 'Converting...' : convertedAmount}
+                value={isLoading ? 'Processing...' : convertedAmount}
                 readOnly
                 className="w-full bg-white text-green-900 rounded-lg px-4 py-4 text-xl font-bold border-0 focus:ring-2 focus:ring-green-300"
               />

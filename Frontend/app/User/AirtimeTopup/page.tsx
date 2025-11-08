@@ -3,6 +3,7 @@
 import { ArrowLeft, CircleUser, Newspaper } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function AirtimeTopup() {
     const [network, setNetwork] = useState('')
@@ -19,9 +20,24 @@ export default function AirtimeTopup() {
 
     const handlePurchaseBtn = () => {
         if (!network || !phoneNumber || !price) {
-            alert('please select enter network, phone number and price')
+            toast.error('select network, input phone number and price')
             return
         }
+
+
+        if (!phoneNumber.startsWith('0')) {
+            setError('Phone number must start with 0');
+            setShowPopup(false);
+            return;
+        }
+
+        if (phoneNumber.length !== 11) {
+            setError('Phone number must be 11 digits');
+            setShowPopup(false);
+            return;
+        }
+
+        setError('');
         setShowPopup(true)
     }
 
@@ -158,7 +174,7 @@ export default function AirtimeTopup() {
                     </div>
                     {/* bottom */}
                     <div className="fixed mb-13 p-2 shadow-md
-                            rounded-t-3xl shadow-t-sm bg-gray-300 shadow-gray-400 w-full  h-55 md:max-w-2xl mx-auto
+                            rounded-t-3xl shadow-t-sm bg-white shadow-gray-400 w-full  h-55 md:max-w-2xl mx-auto
                             bottom-0 left-0 right-0 justify-center z-50">
                         <div className=" p-3 space-y-7 rounded-2xl">
                             <div className="flex flex-col gap-4">
@@ -170,7 +186,7 @@ export default function AirtimeTopup() {
                                 <button
                                     className="cursor-pointer w-[150px] bg-linear-to-r from-green-900 to-lime-400 text-white px-4 py-2 rounded-2xl"
                                     onClick={handleProcess}
-                                    >Process
+                                >Process
                                 </button>
                                 <button
                                     onClick={() => setShowPopup(false)}
@@ -186,7 +202,7 @@ export default function AirtimeTopup() {
                     <div>
                     </div>
                     {/* bottom */}
-                    <div className="bg-gray-200 left-0 right-0 p-4 shadow-md
+                    <div className="bg-white mb-5 left-0 right-0 p-4 shadow-md
                         rounded-t-3xl shadow-t-sm w-full md:max-w-2xl mx-auto">
                         <div className="flex flex-col gap-3 items-center">
                             <h1 className="flex justify-between items-center text-lg px-4 font-bold">Input your pin to pay</h1>
@@ -209,8 +225,7 @@ export default function AirtimeTopup() {
                         <div className="flex mt-4 mb-15 justify-between items-center">
                             <button
                                 className="cursor-pointer w-[150px] bg-linear-to-r from-green-900 to-lime-400 text-white px-4 py-2 rounded-2xl"
-                                onClick={handleProcessSubmit}
-                            >Buy Now</button>
+                                onClick={handleProcessSubmit}>Buy Now</button>
                             <button
                                 onClick={() => setShowPin(false)}
                                 className="bg-gray-600 w-[150px] text-white cursor-pointer px-4 py-2 rounded-2xl">Cancel</button>
@@ -218,6 +233,7 @@ export default function AirtimeTopup() {
                     </div>
                 </div>
             )}
+            <Toaster position="top-center" reverseOrder={true} />
         </div>
     )
 }
