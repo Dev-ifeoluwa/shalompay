@@ -14,7 +14,8 @@ export default function AccountProductCard() {
           Quick actions
         </h4>
         <Link
-          href={"/User/ViewMore"}
+          href=""
+          // href={"/User/ViewMore"}
           className="text-sm font-bold text-[#ff7a3d] hover:text-[#ffa06b] transition"
         >
           See all

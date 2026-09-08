@@ -6,19 +6,16 @@ import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 type DataPlan = {
-    // id: number;
     dataPlan: string;
     Validity: string;
     Price: string;
 }
-
 
 type DataPlans = {
     dataPlan: string;
     Validity: string;
     Price: string;
 }
-
 
 export default function MobileDataTopup() {
     const router = useRouter()
@@ -96,8 +93,6 @@ export default function MobileDataTopup() {
     const handleProcess = () => {
         setShowPopup(false)
         setShowPin(true)
-
-
     }
 
     const handleProcessSubmit = () => {
@@ -112,61 +107,17 @@ export default function MobileDataTopup() {
     }
 
     const DataPrice: DataPlan[] = [
-        {
-            dataPlan: "1GB",
-            Validity: "1 Day",
-            Price: "₦500"
-        },
-        {
-            dataPlan: "2.5GB",
-            Validity: "2 Days",
-            Price: "₦500"
-        },
-        {
-            dataPlan: "500MB",
-            Validity: "7 Days",
-            Price: "₦500"
-        },
-        {
-            dataPlan: "1GB",
-            Validity: "7 Days",
-            Price: "₦800"
-        },
-        {
-            dataPlan: "2.5GB",
-            Validity: "1 Day",
-            Price: "₦750"
-        },
-        {
-            dataPlan: "2GB",
-            Validity: "30 Days",
-            Price: "₦1,500"
-        },
-        {
-            dataPlan: "3.5GB",
-            Validity: "30 Days",
-            Price: "₦500"
-        },
-        {
-            dataPlan: "20GB",
-            Validity: "7 Days",
-            Price: "₦5,000"
-        },
-        {
-            dataPlan: "25GB",
-            Validity: "30 Days",
-            Price: "₦15,000"
-        },
-        {
-            dataPlan: "60GB",
-            Validity: "Year",
-            Price: "₦75,000"
-        },
-        {
-            dataPlan: "100GB",
-            Validity: "Year",
-            Price: "₦110,000"
-        },
+        { dataPlan: "1GB", Validity: "1 Day", Price: "₦500" },
+        { dataPlan: "2.5GB", Validity: "2 Days", Price: "₦500" },
+        { dataPlan: "500MB", Validity: "7 Days", Price: "₦500" },
+        { dataPlan: "1GB", Validity: "7 Days", Price: "₦800" },
+        { dataPlan: "2.5GB", Validity: "1 Day", Price: "₦750" },
+        { dataPlan: "2GB", Validity: "30 Days", Price: "₦1,500" },
+        { dataPlan: "3.5GB", Validity: "30 Days", Price: "₦500" },
+        { dataPlan: "20GB", Validity: "7 Days", Price: "₦5,000" },
+        { dataPlan: "25GB", Validity: "30 Days", Price: "₦15,000" },
+        { dataPlan: "60GB", Validity: "Year", Price: "₦75,000" },
+        { dataPlan: "100GB", Validity: "Year", Price: "₦110,000" },
     ]
 
     const handleChange = (value: string, index: number) => {
@@ -179,160 +130,213 @@ export default function MobileDataTopup() {
     };
 
     return (
-        <div className="p-2 pt-8 mb-15 text-sm md:text-md flex md:pt-5 flex-col gap-5">
-            {error && (
-                <div className="bg-red-400 font-semibold text-white text-[12px] md:text-sm text-center py-2 rounded ">{error}</div>
-            )}
-            <span className="flex justify-between px-2 items-center">
-                <p className="flex items-center gap-3">
-                    <ArrowLeft
-                        onClick={HandleClick}
-                        className="cursor-pointer"
-                        size={20} />
-                    <p className="font-semibold">Mobile Data</p>
-                </p>
-                <p className="cursor-pointer font-semibold">History</p>
-            </span>
-            <div className="flex items-center justify-between p-1">
-                <div className="flex items-center p-1 mt-4">
-                    <select name="" id=""
-                        onChange={(e) => setNetwork(e.target.value)}
-                        className="text-sm font-semibold outline-0 border-0">
-                        <option value="">Network</option>
-                        <option value="MTN">MTN</option>
-                        <option value="Glo">Glo</option>
-                        <option value="Airtel">Airtel</option>
-                        <option value="9mobile">9mobile</option>
-                    </select>
-                    <input
-                        name="tel"
-                        id='tel'
-                        type="tel"
-                        value={phoneNumber}
-                        onChange={(e) => {
-                            const value = e.target.value.replace(/\D/g, '');
-                            setPhoneNumber(value);
+        <div className="relative min-h-screen overflow-hidden bg-[linear-gradient(180deg,#1a0f0a_0%,#0e0704_40%,#0a0503_100%)]">
+            <div className="pointer-events-none absolute -top-16 left-1/2 -translate-x-1/2 w-72 h-72 rounded-full bg-[#ff7a3d]/25 blur-2xl" />
 
-                            if (value.length > 0 && value[0] !== '0') {
-                                setError('phone number must start with 0');
-                            } else if (value.length > 0 && value.length !== 11) {
-                                setError('phone number must be 11 digits');
-                            }
-                            else {
-                                setError('')
-                            }
-                        }}
-                        maxLength={11}
-                        className="max-w-50 px-7 py-1 outline-0 border-0"
-                        placeholder="Phone number"
-                    />
-                </div>
-                <div className="bg-green-600 rounded-full">
-                    <CircleUser className="cursor-pointer text-white" />
-                </div>
-            </div>
-            <div className="flex flex-col text-[12px] md:text-sm gap-5 px-2 rounded-md shadow-sm py-4 shadow-gray-600">
-                <div className="flex text-gray-600 justify-between items-center px-3">
-                    {tabs.map((tab) => (
+            <div className="z-10 mx-auto w-full  px-4 py-6 sm:px-6 sm:py-8 pb-24 flex flex-col gap-5 text-sm">
+
+                {error && (
+                    <div className="bg-[#e8563a]/15 border border-[#e8563a]/30 text-[#e8563a] font-semibold text-xs sm:text-sm text-center py-2.5 rounded-xl">
+                        {error}
+                    </div>
+                )}
+
+                {/* Top bar */}
+                <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-3">
                         <button
-                            key={tab}
-                            className="bg-gray-200 px-2.5 py-1 rounded-full"
-                            onClick={() => handleTabClick(tab as 'Hot' | 'Daily' | 'Weekly' | 'Monthly' | 'Yearly')}>
-                            {tab}
+                            onClick={HandleClick}
+                            className="flex items-center justify-center w-9 h-9 rounded-full bg-white/[0.06] border border-white/[0.08] text-[#d8c3b6] hover:text-white transition"
+                        >
+                            <ArrowLeft size={16} />
                         </button>
-                    ))}
-                </div>
-                <div className="grid grid-cols-3 gap-2">
-                    {filteredPlan.length === 0}
-                    {filteredPlan.map((plan: DataPlan, index: number) => (
-                        <div key={index}
-                            onClick={() => handleCardClick(plan)}
-                            className="px-2 py-6 flex flex-col gap-2 shadow-sm shadow-gray-600 rounded-2xl cursor-pointer text-green-800 font-semibold text-md text-center bg-gray-100">
-                            <p>{plan.dataPlan}</p>
-                            <p className="text-[12px] text-white md:text-sm bg-linear-to-r from-green-900 to-lime-400">{plan.Validity}</p>
-                            <p className="text-[12px] md:text-sm text-gray-600">{plan.Price}</p>
-                        </div>
-                    ))}
-                </div>
-                <div>
-                </div>
-            </div>
-            <div className="flex flex-col gap-2 p-2 shadow-sm rounded-md shadow-gray-600">
-                <p className="p-1 text-gray-700 font-semibold">Data Service</p>
-                <span className="flex items-center gap-2">
-                    <Newspaper className="text-gray-700" />
-                    <div>
-                        <p className="font-semibold text-[12px] md:text-sm">USSD enquiry</p>
-                        <p className="text-[12px] text-sm">Check phone and more</p>
+                        <p className="font-semibold text-[#fbf3ec] text-base italic font-serif">Mobile Data</p>
                     </div>
-                </span>
-            </div>
-            {showPopup && selectPlan && (
-                <div className="fixed inset-0 flex flex-col justify-between bg-opacity-50 backdrop-blur-[3px] w-full h-screen">
-                    {/* top */}
-                    <div>
+                    <p className="cursor-pointer font-semibold text-sm text-[#ff7a3d]">History</p>
+                </div>
+
+                {/* Network + phone number */}
+                <div className="flex items-center justify-between gap-3 rounded-2xl border border-white/[0.08] bg-[#26140c] px-4 py-3">
+                    <div className="flex items-center gap-2 flex-1 min-w-0">
+                        <select
+                            onChange={(e) => setNetwork(e.target.value)}
+                            className="bg-transparent text-sm font-semibold outline-none border-0 text-[#fbf3ec] cursor-pointer flex-shrink-0"
+                        >
+                            <option className="text-black" value="">Network</option>
+                            <option className="text-black" value="MTN">MTN</option>
+                            <option className="text-black" value="Glo">Glo</option>
+                            <option className="text-black" value="Airtel">Airtel</option>
+                            <option className="text-black" value="9mobile">9mobile</option>
+                        </select>
+                        <span className="w-px h-5 bg-white/[0.1] flex-shrink-0" />
+                        <input
+                            name="tel"
+                            id="tel"
+                            type="tel"
+                            value={phoneNumber}
+                            onChange={(e) => {
+                                const value = e.target.value.replace(/\D/g, '');
+                                setPhoneNumber(value);
+
+                                if (value.length > 0 && value[0] !== '0') {
+                                    setError('phone number must start with 0');
+                                } else if (value.length > 0 && value.length !== 11) {
+                                    setError('phone number must be 11 digits');
+                                } else {
+                                    setError('')
+                                }
+                            }}
+                            maxLength={11}
+                            className="w-full bg-transparent outline-none border-0 text-sm text-[#fbf3ec] placeholder:text-[#8f7768]"
+                            placeholder="Phone number"
+                        />
                     </div>
-                    {/* bottom */}
-                    <div className="mb-13 bg-white left-0 right-0 p-4 shadow-md
-                            rounded-t-3xl shadow-t-sm w-full md:max-w-2xl mx-auto">
-                        <div className="flex flex-col gap-3">
-                            <p className="flex justify-between items-center px-4"><strong>Service: </strong>{network}</p>
-                            <p className="flex justify-between items-center px-4"><strong>Number: </strong>{phoneNumber}</p>
-                            <p className="flex justify-between items-center px-4"><strong>Data plan: </strong>{selectPlan.dataPlan}</p>
-                            <p className="flex justify-between items-center px-4"><strong>Validity: </strong>{selectPlan.Validity}</p>
-                            <p className="flex justify-between items-center px-4"><strong>Price: </strong>{selectPlan.Price}</p>
-                        </div>
-                        <div className="flex mt-4 justify-between items-center">
+                    <div className="flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-full bg-[#ff7a3d]/15 text-[#ff7a3d]">
+                        <CircleUser size={18} />
+                    </div>
+                </div>
+
+                {/* Plans */}
+                <div className="flex flex-col gap-4 rounded-2xl border border-white/[0.08] bg-[#26140c] px-3 py-4 sm:px-4">
+                    <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+                        {tabs.map((tab) => (
                             <button
-                                className="cursor-pointer w-[150px] bg-linear-to-r from-green-900 to-lime-400 text-white px-4 py-2 rounded-2xl"
-                                onClick={handleProcess}
-                            >Process</button>
-                            <button
-                                onClick={() => setShowPopup(false)}
-                                className="bg-gray-600 w-[150px] text-white cursor-pointer px-4 py-2 rounded-2xl">Cancel</button>
-                        </div>
+                                key={tab}
+                                onClick={() => handleTabClick(tab as 'Hot' | 'Daily' | 'Weekly' | 'Monthly' | 'Yearly')}
+                                className={`text-xs font-bold px-3.5 py-1.5 rounded-full whitespace-nowrap transition ${
+                                    activeTab === tab
+                                        ? "bg-[#ff7a3d] text-[#1a0d05]"
+                                        : "bg-white/[0.06] text-[#8f7768]"
+                                }`}
+                            >
+                                {tab}
+                            </button>
+                        ))}
                     </div>
-                </div>
-            )}
-            {showPin && (
-                <div className="fixed inset-0 flex flex-col justify-between bg-opacity-50 backdrop-blur-[3px] w-full h-screen">
-                    {/* top */}
-                    <div>
-                    </div>
-                    {/* bottom */}
-                    <div className="bg-white mb-5 left-0 right-0 p-4 shadow-md
-                        rounded-t-3xl shadow-t-sm w-full md:max-w-2xl mx-auto">
-                        <div className="flex flex-col gap-3 items-center">
-                            <h1 className="flex justify-between items-center text-lg px-4 font-bold">Input your pin to pay</h1>
-                            <h1 className="flex justify-between items-center px-4 font-bold text-2xl">{selectPlan?.Price}</h1>
-                            <div className="flex justify-center gap-3 mb-8">
-                                {pin.map((digit, i) => (
-                                    <input
-                                        key={i}
-                                        id={`pin-${i}`}
-                                        type="password"
-                                        maxLength={1}
-                                        value={digit}
-                                        onChange={(e) => handleChange(e.target.value, i)}
-                                        className="w-10 h-10 text-center text-lg font-semibold border-b-2 border-gray-500 focus:border-green-500 outline-none"
-                                    />
-                                ))}
+
+                    <div className="grid grid-cols-3 gap-2 sm:gap-3">
+                        {filteredPlan.map((plan: DataPlan, index: number) => (
+                            <div
+                                key={index}
+                                onClick={() => handleCardClick(plan)}
+                                className="flex flex-col items-center gap-1.5 rounded-xl border border-white/[0.08] bg-[#301a10] px-2 py-4 cursor-pointer text-center"
+                            >
+                                <p className="font-bold text-sm text-[#fbf3ec]">{plan.dataPlan}</p>
+                                <span className="text-[10px] font-semibold text-[#1a0d05] bg-gradient-to-r from-[#ff7a3d] to-[#f4b860] px-2 py-0.5 rounded-full">
+                                    {plan.Validity}
+                                </span>
+                                <p className="text-[11px] text-[#8f7768]">{plan.Price}</p>
                             </div>
-                            <button className="flex cursor-pointer font-semibold text-green-800 text-[14px] justify-between items-center px-4">forgot PIN</button>
-                        </div>
-                        <div className="flex mt-4 mb-15 justify-between items-center">
-                            <button
-                                className="cursor-pointer w-[150px] bg-linear-to-r from-green-900 to-lime-400 text-white px-4 py-2 rounded-2xl"
-                                onClick={handleProcessSubmit}
-                            >Buy Now</button>
-                            <button
-                                onClick={() => setShowPin(false)}
-                                className="bg-gray-600 w-[150px] text-white cursor-pointer px-4 py-2 rounded-2xl">Cancel</button>
-                        </div>
+                        ))}
                     </div>
                 </div>
-            )}
-            <Toaster position="top-center" reverseOrder={true} />
+
+                {/* Data service info */}
+                <div className="flex items-center gap-3 mb-10 rounded-2xl border border-white/[0.08] bg-[#26140c] px-4 py-4">
+                    <span className="flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-xl bg-[#ff7a3d]/15 text-[#ff7a3d]">
+                        <Newspaper size={16} />
+                    </span>
+                    <div>
+                        <p className="font-semibold text-sm text-[#fbf3ec]">USSD enquiry</p>
+                        <p className="text-xs text-[#8f7768]">Check phone and more</p>
+                    </div>
+                </div>
+
+                {/* Confirm popup */}
+                {showPopup && selectPlan && (
+                    <div className="fixed inset-0 z-50 flex flex-col justify-end bg-black/60 backdrop-blur-[3px]">
+                        <div className="mb-0 bg-[#1e100a] border-t border-white/[0.08] left-0 right-0 p-5 sm:p-6 rounded-t-3xl w-full md:max-w-lg mx-auto">
+                            <div className="flex justify-between items-center mb-4">
+                                <p className="text-base font-semibold italic font-serif text-[#fbf3ec]">Confirm order</p>
+                                <button
+                                    onClick={() => setShowPopup(false)}
+                                    className="flex items-center justify-center w-8 h-8 rounded-full bg-white/[0.06] text-[#d8c3b6]"
+                                >
+                                    <X size={15} />
+                                </button>
+                            </div>
+                            <div className="flex flex-col gap-3 rounded-2xl border border-white/[0.08] bg-[#26140c] px-4 py-4">
+                                <SummaryRow label="Service" value={network} />
+                                <SummaryRow label="Number" value={phoneNumber} />
+                                <SummaryRow label="Data plan" value={selectPlan.dataPlan} />
+                                <SummaryRow label="Validity" value={selectPlan.Validity} />
+                                <SummaryRow label="Price" value={selectPlan.Price} highlight />
+                            </div>
+                            <div className="flex mt-5 gap-3 items-center">
+                                <button
+                                    onClick={() => setShowPopup(false)}
+                                    className="flex-1 py-3 rounded-xl font-bold text-sm text-[#fbf3ec] border border-white/[0.1]"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    onClick={handleProcess}
+                                    className="flex-1 py-3 rounded-xl font-bold text-sm text-[#1a0d05] bg-gradient-to-br from-[#ff7a3d] to-[#c1440e] shadow-lg shadow-orange-900/40"
+                                >
+                                    Process
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* PIN popup */}
+                {showPin && (
+                    <div className="fixed inset-0 z-50 flex flex-col justify-end bg-black/60 backdrop-blur-[3px]">
+                        <div className="bg-[#1e100a] border-t border-white/[0.08] left-0 right-0 p-5 sm:p-6 rounded-t-3xl w-full md:max-w-lg mx-auto">
+                            <div className="flex flex-col gap-3 items-center">
+                                <h1 className="text-base font-semibold italic font-serif text-[#fbf3ec]">
+                                    Input your PIN to pay
+                                </h1>
+                                <h1 className="font-serif text-2xl font-semibold text-[#f4b860]">
+                                    {selectPlan?.Price}
+                                </h1>
+                                <div className="flex justify-center gap-3 my-6">
+                                    {pin.map((digit, i) => (
+                                        <input
+                                            key={i}
+                                            id={`pin-${i}`}
+                                            type="password"
+                                            maxLength={1}
+                                            value={digit}
+                                            onChange={(e) => handleChange(e.target.value, i)}
+                                            className="w-11 h-11 text-center text-lg font-semibold rounded-xl bg-white/[0.06] border border-white/[0.1] text-[#fbf3ec] outline-none focus:border-[#ff7a3d]"
+                                        />
+                                    ))}
+                                </div>
+                                <button className="font-semibold text-[#ff7a3d] text-xs">
+                                    Forgot PIN
+                                </button>
+                            </div>
+                            <div className="flex mt-6 gap-3 items-center">
+                                <button
+                                    onClick={() => setShowPin(false)}
+                                    className="flex-1 py-3 rounded-xl font-bold text-sm text-[#fbf3ec] border border-white/[0.1]"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    onClick={handleProcessSubmit}
+                                    className="flex-1 py-3 rounded-xl font-bold text-sm text-[#1a0d05] bg-gradient-to-br from-[#ff7a3d] to-[#c1440e] shadow-lg shadow-orange-900/40"
+                                >
+                                    Buy now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                <Toaster position="top-center" reverseOrder={true} />
+            </div>
         </div>
     )
+}
+
+function SummaryRow({ label, value, highlight }: { label: string; value?: string; highlight?: boolean }) {
+    return (
+        <div className="flex justify-between items-center text-sm">
+            <span className="text-[#8f7768]">{label}</span>
+            <span className={`font-semibold ${highlight ? "text-[#f4b860]" : "text-[#fbf3ec]"}`}>{value}</span>
+        </div>
+    );
 }
