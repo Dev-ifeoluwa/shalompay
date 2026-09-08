@@ -323,17 +323,17 @@ export default function ProfilePage() {
               <div className="flex items-center justify-between mb-2">
                 <p className="text-sm font-bold text-[#fbf3ec]">Complete your profile</p>
                 <span className="text-sm font-bold text-[#f4b860]">
-                  {profile.completionPercent ?? 70}%
+                  {profile.completionPercent ?? 10}%
                 </span>
               </div>
               <div className="h-1.5 rounded-full bg-white/[0.08] overflow-hidden">
                 <div
                   className="h-full rounded-full bg-gradient-to-r from-[#ff7a3d] to-[#f4b860]"
-                  style={{ width: `${profile.completionPercent ?? 70}%` }}
+                  style={{ width: `${profile.completionPercent ?? 10}%` }}
                 />
               </div>
               <p className="text-xs text-[#8f7768] mt-2.5">
-                Add your BVN to unlock higher transfer limits.
+                Complete your KYC.
               </p>
             </div>
 
