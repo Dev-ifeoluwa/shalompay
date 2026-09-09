@@ -12,8 +12,9 @@ export default function Hero() {
           <FancyHeading />
         </div>
         <p className="mt-4 max-w-2xl  text-[#F4E3D3] text-lg md:text-2xl cursor-default">
-          No more juggling apps for every bill. Sollnis Pay brings your airtime
-          data cable and electricity payments together fast secure and always reliable.
+          Gift cards, currency swaps, airtime, data, betting funding, and TV 
+          subscriptions we brings it all together in 
+          one place. Fast, secure, and always reliable.
         </p>
         {/* ----button section----- */}
         <div className="flex items-center gap-5 px-2 md:px-1">

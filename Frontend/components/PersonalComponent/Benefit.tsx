@@ -12,7 +12,7 @@ const steps: Step[] = [
     number: "01",
     title: "Create an account",
     description:
-      "Sign up in under 60 seconds with just your basic details. No hidden fees.",
+      "Sign up in under 60 seconds with just your basic details, and get verified.",
   },
   {
     number: "02",

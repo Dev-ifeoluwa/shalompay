@@ -40,7 +40,7 @@ export default function About() {
           <p className="mb-10 max-w-md text-[17px] leading-relaxed text-brand-brown-soft">
             We built this platform because paying bills in Nigeria
             shouldn't mean juggling five different apps, unstable
-            connections, and unclear charges. From airtime and data to
+            connections, and unclear charges. From gift card and data to
             cable subscriptions and electricity tokens, everything routes
             through one secure, dependable system so you spend less
             time on logistics and more time on what actually matters to
