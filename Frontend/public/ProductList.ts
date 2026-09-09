@@ -24,7 +24,7 @@ import {
     },
     {
       icon: EuroIcon,
-      Name: "Convert Funds",
+      Name: "Convert money",
       href: "/User/Convertmoney"
     },
     {
@@ -34,12 +34,12 @@ import {
     },
     {
       icon: PhoneCall,
-      Name: "Airtime Topup",
+      Name: "Airtime",
       href: "/User/AirtimeTopup"
     },
     {
       icon: Gamepad2,
-      Name: "Sport wallet Funding",
+      Name: "Sport betting",
       href: "/User/Betting"
     },
     {

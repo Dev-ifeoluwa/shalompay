@@ -9,11 +9,11 @@ export default function PersonalAccount() {
         <div>
           <Animate type="fade-up" delay={300}>
             <Image
-              src={"/back22.png"}
+              src={"/app001.png"}
               alt=""
-              width={700}
-              height={800}
-              className="rounded-b-[800px]"
+              width={350}
+              height={350}
+              className="-rotate-20"
             />
           </Animate>
         </div>
@@ -25,10 +25,10 @@ export default function PersonalAccount() {
           </Animate>
           <p className="text-[17px] text-gray-700">
             Paying bills shouldn't be complicated. We take
-             your money seriously, 
-            so we built a platform where 
+            your money seriously,
+            so we built a platform where
             you can manage your funds, make payments, and settle every
-             bill all in one place.
+            bill all in one place.
           </p>
           <Link
             href={"/Account/loginaccount"}

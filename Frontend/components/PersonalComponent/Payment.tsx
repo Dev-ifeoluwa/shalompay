@@ -25,7 +25,13 @@ export default function Payment() {
         {/* right */}
         <div className="max-w-[250px] md:max-w-md lg:max-w-lg">
           <Animate type="fade-down" delay={300}>
-            <Image src={"/app11.png"} alt="" width={300} height={300} />
+            <Image 
+            src={"/app002.png"} 
+            alt="" 
+            width={300} 
+            height={300} 
+            className="rotate-20"
+            />
           </Animate>
         </div>
       </div>
