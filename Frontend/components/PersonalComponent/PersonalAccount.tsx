@@ -13,7 +13,7 @@ export default function PersonalAccount() {
               alt=""
               width={350}
               height={350}
-              className="-rotate-20"
+              // className="-rotate-20"
             />
           </Animate>
         </div>

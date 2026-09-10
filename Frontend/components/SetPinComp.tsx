@@ -78,7 +78,7 @@ const SetPinCom: React.FC = () => {
 
         <button
           type="submit"
-          className="w-full py-2 cursor-pointer bg-linear-to-r from-green-700 to-lime-400 text-white rounded-lg font-medium hover:opacity-90 transition"
+          className="w-full py-2 cursor-pointer bg-linear-to-r from-orange-700 bg-amber-900 text-white rounded-lg font-medium hover:opacity-90 transition"
         >
           Proceed
         </button>
